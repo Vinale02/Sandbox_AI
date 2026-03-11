@@ -1,6 +1,5 @@
 from openai import AsyncOpenAI
 from config import TOKEN_GPT_AI
-import asyncio
 import logging
 
 client = AsyncOpenAI(api_key=TOKEN_GPT_AI)
@@ -20,7 +19,11 @@ async def ask_gpt(
         messages = [{'role': 'system', 'content': system_prompt}]
 
         if history:
-            messages.append(history)
+            valid_history = [
+                item for item in history
+                if isinstance(item, dict) and 'role' in item and 'content' in item
+            ]
+            messages.extend(valid_history)
         messages.append({'role': 'user', 'content': user_message})
         logger.info(f'GPT запрос {user_message[:20]}')
 
@@ -36,11 +39,3 @@ async def ask_gpt(
     except Exception as e:
         logger.error(f'Ошибка GPT {e}')
         return 'Ошибка при обращении к GPT. Попробуй ещё раз'
-
-
-async def main():
-    answer = await ask_gpt(user_message='Как дела?')
-    print(answer)
-
-
-asyncio.run(main())
