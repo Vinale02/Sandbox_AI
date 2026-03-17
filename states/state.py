@@ -13,3 +13,8 @@ class TalkStates(StatesGroup):
 class QuizStates(StatesGroup):
     choosing_topic = State()
     answering = State()
+
+
+class TranslateStates(StatesGroup):
+    choosing_language = State()
+    answering = State()

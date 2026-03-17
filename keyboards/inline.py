@@ -68,3 +68,14 @@ def after_answer_keyboard() -> InlineKeyboardMarkup:
             [InlineKeyboardButton(text='⛔ Закончить квиз', callback_data='quiz:stop', style='danger')]
         ]
     )
+
+
+def choose_language_keyboard() -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(
+        inline_keyboard= [
+            [
+                InlineKeyboardButton(text='Русский', callback_data='translate:lang:rus'),
+                InlineKeyboardButton(text='English', callback_data='translate:lang:eng')
+            ]
+        ]
+    )
