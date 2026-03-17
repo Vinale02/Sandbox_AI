@@ -8,3 +8,8 @@ class GptStates(StatesGroup):
 class TalkStates(StatesGroup):
     choosing_person = State()
     chatting = State()
+
+
+class QuizStates(StatesGroup):
+    choosing_topic = State()
+    answering = State()
