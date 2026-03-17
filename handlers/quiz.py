@@ -7,7 +7,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.enums import ChatAction
 from aiogram.types import Message, FSInputFile, CallbackQuery
 from states.state import QuizStates
-from keyboards.inline import quiz_topics_keyboard, after_answer_keyboard
+from keyboards.inline import quiz_topics_keyboard, after_answer_keyboard, main_menu
 from utils.quiz_generate import send_next_question, check_answer
 from data.topics import TOPICS
 
@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 
 
 @router.message(Command('quiz'))
-async def cmd_quis(message: Message, state: FSMContext):
+async def cmd_quiz(message: Message, state: FSMContext):
     await state.set_state(QuizStates.choosing_topic)
 
     try:
@@ -150,6 +150,6 @@ async def on_quiz_cancel(callback: CallbackQuery, state: FSMContext):
     await callback.answer()
 
     try:
-        await callback.message.edit_caption(caption='Квиз отменен')
+        await callback.message.edit_caption(caption='Режим "Квиз" отменен.\n\n<b>Главное меню:</b>', reply_markup=main_menu())
     except Exception:
-        await callback.message.edit_text('Квиз отменен')
+        await callback.message.edit_text('Режим "Квиз" отменен.\n\n<b>Главное меню:</b>', reply_markup=main_menu())

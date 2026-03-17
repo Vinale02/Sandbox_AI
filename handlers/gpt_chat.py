@@ -1,7 +1,7 @@
 import logging
 from aiogram import Router, F
 from aiogram.filters import Command
-from aiogram.types import Message, CallbackQuery, FSInputFile
+from aiogram.types import Message, CallbackQuery, FSInputFile, ReplyKeyboardMarkup
 from aiogram.fsm.context import FSMContext
 from states.state import GptStates
 from aiogram.enums import ChatAction
@@ -73,6 +73,6 @@ async def on_gpt_stop(callback: CallbackQuery, state: FSMContext):
     await callback.answer('Выхожу из режима "ChatGPT"')
 
     try:
-        await callback.message.edit_caption(caption='Режим "ChatGPT" завершен')
+        await callback.message.edit_caption(caption='Режим "ChatGPT" завершен.\n\n<b>Главное меню:</b>', reply_markup=main_menu())
     except Exception as e:
-        await callback.message.edit_text(text='Режим "ChatGPT" завершен')
+        await callback.message.edit_text(text='Режим "ChatGPT" завершен', reply_markup=main_menu())

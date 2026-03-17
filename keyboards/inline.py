@@ -16,7 +16,7 @@ def random_keyboard() -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup(
         inline_keyboard=[
             [InlineKeyboardButton(text='🎲 Хочу ещё факт', callback_data='random:again')],
-            [InlineKeyboardButton(text='⛔ Закончить', callback_data='random:stop')]
+            [InlineKeyboardButton(text='⛔ Закончить', callback_data='random:stop', style='danger')]
         ]
     )
 
@@ -24,7 +24,7 @@ def random_keyboard() -> InlineKeyboardMarkup:
 def gpt_keyboard() -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup(
         inline_keyboard=[
-            [InlineKeyboardButton(text='⛔ Закончить', callback_data='gpt:stop')]
+            [InlineKeyboardButton(text='⛔ Закончить', callback_data='gpt:stop', style='danger')]
         ]
     )
 
@@ -35,7 +35,7 @@ def persons_keyboard(persons):
         for key, data in persons.items()
     ]
     buttons.append([
-        InlineKeyboardButton(text='⛔ Закончить', callback_data='talk:stop')
+        InlineKeyboardButton(text='⛔ Закончить', callback_data='talk:stop', style='danger')
     ])
     return InlineKeyboardMarkup(inline_keyboard=buttons)
 
@@ -44,7 +44,7 @@ def talk_keyboard():
     return InlineKeyboardMarkup(
         inline_keyboard=[
             [InlineKeyboardButton(text='🔄 Сменить собеседника', callback_data='talk:change')],
-            [InlineKeyboardButton(text='⛔ Закончить', callback_data='talk:stop')]
+            [InlineKeyboardButton(text='⛔ Закончить', callback_data='talk:stop', style='danger')]
         ]
     )
 
@@ -55,7 +55,7 @@ def quiz_topics_keyboard(topics: dict) -> InlineKeyboardMarkup:
         for key, data in topics.items()
     ]
     buttons.append(
-        [InlineKeyboardButton(text='⛔ Отмена', callback_data='quiz:cancel')]
+        [InlineKeyboardButton(text='⛔ Отмена', callback_data='quiz:cancel', style='danger')]
     )
     return InlineKeyboardMarkup(inline_keyboard=buttons)
 
@@ -65,6 +65,6 @@ def after_answer_keyboard() -> InlineKeyboardMarkup:
         inline_keyboard= [
             [InlineKeyboardButton(text='➡️ Следующий вопрос', callback_data='quiz:next')],
             [InlineKeyboardButton(text='🔄 Сменить тему', callback_data='quiz:change_topic')],
-            [InlineKeyboardButton(text='⛔ Закончить квиз', callback_data='quiz:stop')]
+            [InlineKeyboardButton(text='⛔ Закончить квиз', callback_data='quiz:stop', style='danger')]
         ]
     )

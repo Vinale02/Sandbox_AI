@@ -1,8 +1,13 @@
 from aiogram import Router, F
 from aiogram.filters import Command
+from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, CallbackQuery
+
+from handlers.talk import cmd_talk
 from keyboards.inline import main_menu
 from handlers.random_fact import send_random_fact
+from handlers.gpt_chat import cmd_gpt
+from handlers.quiz import cmd_quiz
 
 
 router = Router()
@@ -23,6 +28,7 @@ async def cmd_help(message: Message):
         '/random - Случайный факт\n'
         '/gpt - Диалог с ChatGPT\n'
         '/talk - Диалог с известной личностью\n'
+        '/quiz - Квиз'
         '/help - Это сообщение',
         parse_mode='html'
     )
@@ -35,18 +41,19 @@ async def om_menu_random(callback: CallbackQuery):
 
 
 @router.callback_query(F.data == 'menu:gpt')
-async def om_menu_random(callback: CallbackQuery):
+async def om_menu_random(callback: CallbackQuery, state: FSMContext):
     await callback.answer()
-    await callback.message.answer('Напиши /gpt чтобы войти в режим "ChatGPT"')
+    await cmd_gpt(callback.message, state)
 
 
 @router.callback_query(F.data == 'menu:talk')
-async def om_menu_random(callback: CallbackQuery):
+async def om_menu_random(callback: CallbackQuery, state: FSMContext):
     await callback.answer()
-    await callback.message.answer('Напиши /talk, чтобы войти в режим "Диалог с личностью"')
+    await cmd_talk(callback.message, state)
 
 
 
 @router.callback_query(F.data == 'menu:quiz')
-async def om_menu_random(callback: CallbackQuery):
+async def om_menu_random(callback: CallbackQuery, state: FSMContext):
     await callback.answer()
+    await cmd_quiz(callback.message, state)

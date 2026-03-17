@@ -125,6 +125,6 @@ async def on_talk_stop(callback: CallbackQuery, state: FSMContext):
     await callback.answer('Выхожу из режима "Общение с личностью"')
 
     try:
-        await callback.message.edit_caption(caption='Режим "Общение с личностью" завершен')
+        await callback.message.edit_caption(caption='Режим "Общение с личностью" завершен.\n\n<b>Главное меню:</b>', reply_markup=main_menu())
     except Exception as e:
-        await callback.message.edit_text(text='Режим "Общение с личностью" завершен')
+        await callback.message.edit_text(text='Режим "Общение с личностью" завершен.\n\n<b>Главное меню:</b>', reply_markup=main_menu())

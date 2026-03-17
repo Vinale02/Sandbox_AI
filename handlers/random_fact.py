@@ -50,5 +50,7 @@ async def cmd_random_again(callback: CallbackQuery):
 @router.callback_query(F.data == 'random:stop')
 async def cmd_random_stop(callback: CallbackQuery):
     await callback.answer()
-    await callback.message.delete()
-    await callback.message.answer('Выбери какой-то пункт', reply_markup=main_menu())
+    try:
+        await callback.message.edit_caption(caption='<b>Главное меню:</b>', reply_markup=main_menu())
+    except Exception:
+        await callback.message.answer('<b>Главное меню:</b>', reply_markup=main_menu())
