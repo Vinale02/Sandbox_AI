@@ -7,7 +7,8 @@ def main_menu() -> InlineKeyboardMarkup:
             [InlineKeyboardButton(text='🎲 Случайный факт', callback_data='menu:random', style='primary')],
             [InlineKeyboardButton(text='🤖 Chat GPT', callback_data='menu:gpt', style='primary')],
             [InlineKeyboardButton(text='🗣️ Диалог с личностью', callback_data='menu:talk', style='primary')],
-            [InlineKeyboardButton(text='🎯 Квиз', callback_data='menu:quiz', style='primary')]
+            [InlineKeyboardButton(text='🎯 Квиз', callback_data='menu:quiz', style='primary')],
+            [InlineKeyboardButton(text='🌐 Переводчик',callback_data='menu:translate', style='primary')]
         ]
     )
 
@@ -75,7 +76,21 @@ def choose_language_keyboard() -> InlineKeyboardMarkup:
         inline_keyboard= [
             [
                 InlineKeyboardButton(text='Русский', callback_data='translate:lang:rus'),
-                InlineKeyboardButton(text='English', callback_data='translate:lang:eng')
+                InlineKeyboardButton(text='English', callback_data='translate:lang:eng'),
+            ],
+            [
+                InlineKeyboardButton(text='⛔ Закончить', callback_data='translate:stop', style='danger')
+            ]
+        ]
+    )
+
+
+def translate_keyboard() -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(
+        inline_keyboard= [
+            [
+                InlineKeyboardButton(text='🔄 Сменить язык', callback_data='translate:change_lang'),
+                InlineKeyboardButton(text='⛔ Закончить', callback_data='translate:stop', style='danger')
             ]
         ]
     )
