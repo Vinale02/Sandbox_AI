@@ -8,7 +8,8 @@ def main_menu() -> InlineKeyboardMarkup:
             [InlineKeyboardButton(text='🤖 Chat GPT', callback_data='menu:gpt', style='primary')],
             [InlineKeyboardButton(text='🗣️ Диалог с личностью', callback_data='menu:talk', style='primary')],
             [InlineKeyboardButton(text='🎯 Квиз', callback_data='menu:quiz', style='primary')],
-            [InlineKeyboardButton(text='🌐 Переводчик',callback_data='menu:translate', style='primary')]
+            [InlineKeyboardButton(text='🌐 Переводчик',callback_data='menu:translate', style='primary')],
+            [InlineKeyboardButton(text='🖼️ Анализ изображений', callback_data='menu:image_gpt', style='primary')]
         ]
     )
 
@@ -91,6 +92,16 @@ def translate_keyboard() -> InlineKeyboardMarkup:
             [
                 InlineKeyboardButton(text='🔄 Сменить язык', callback_data='translate:change_lang'),
                 InlineKeyboardButton(text='⛔ Закончить', callback_data='translate:stop', style='danger')
+            ]
+        ]
+    )
+
+
+def image_gpt_keyboard() -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(
+        inline_keyboard= [
+            [
+                InlineKeyboardButton(text='⛔ Закончить', callback_data='image_gpt:stop', style='danger')
             ]
         ]
     )

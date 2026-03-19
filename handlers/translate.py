@@ -4,7 +4,6 @@ from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.enums import ChatAction
 from aiogram.types import Message, FSInputFile, CallbackQuery
-
 from services.openai_service import ask_gpt
 from states.state import TranslateStates
 from keyboards.inline import main_menu, choose_language_keyboard, translate_keyboard

@@ -1,4 +1,3 @@
-from html import escape
 from aiogram.enums import ChatAction
 from services.openai_service import ask_gpt
 from aiogram.types import Message

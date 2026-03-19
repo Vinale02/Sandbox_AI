@@ -1,6 +1,8 @@
 from openai import AsyncOpenAI
 from config import TOKEN_GPT_AI
 import logging
+from utils.utils import async_encode_image, encode_image
+import asyncio
 
 client = AsyncOpenAI(api_key=TOKEN_GPT_AI)
 MODEL = 'gpt-4o-mini'
@@ -39,3 +41,32 @@ async def ask_gpt(
     except Exception as e:
         logger.error(f'Ошибка GPT {e}')
         return 'Ошибка при обращении к GPT. Попробуй ещё раз'
+
+
+async def photo_processing(image_path: str)-> str:
+    try:
+        base64_image = await async_encode_image(image_path)
+
+        response = await client.responses.create(
+            model=MODEL,
+            input=[
+                {
+                    "role": "user",
+                    "content": [
+                        {"type": "input_text", "text": "опиши, что на изображении?"},
+                        {
+                            "type": "input_image",
+                            "image_url": f"data:image/jpeg;base64,{base64_image}",
+                        },
+                    ],
+                }
+            ],
+        )
+        answer = response.output[0].content[0].text
+        logger.info(f'Ответ GPT {len(answer)} символов')
+        return answer
+    except Exception as e:
+        logger.error(f'Ошибка GPT {e}')
+        return 'Ошибка при обращении к GPT. Попробуй ещё раз'
+
+#asyncio.run(photo_processing('../images/gpt.png'))

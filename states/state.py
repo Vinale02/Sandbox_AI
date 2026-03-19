@@ -17,4 +17,7 @@ class QuizStates(StatesGroup):
 
 class TranslateStates(StatesGroup):
     choosing_language = State()
-    answering = State()
+
+
+class ImageStates(StatesGroup):
+    sending = State()

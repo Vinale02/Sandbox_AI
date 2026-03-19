@@ -1,12 +1,12 @@
 import logging
 from aiogram import Router, F
 from aiogram.filters import Command
-from aiogram.types import Message, CallbackQuery, FSInputFile, ReplyKeyboardMarkup
+from aiogram.types import Message, CallbackQuery, FSInputFile
 from aiogram.fsm.context import FSMContext
 from states.state import GptStates
 from aiogram.enums import ChatAction
 from services.openai_service import ask_gpt
-from keyboards.inline import random_keyboard, main_menu, gpt_keyboard
+from keyboards.inline import main_menu, gpt_keyboard
 
 
 router = Router()
@@ -35,10 +35,11 @@ async def cmd_gpt(message: Message, state: FSMContext):
                                        'Нажми <b>Закончить</b>, чтобы выйти'
                                    ), reply_markup=gpt_keyboard(), parse_mode='html')
     except Exception as e:
-        await message.answer('<b>Режим ChatGPT</b>\n\n'
+        await message.answer(text=('<b>Режим ChatGPT</b>\n\n'
                              'Напиши любой вопрос - я  отвечу\n'
                              'Контекст дивлога сохраняется\n'
-                             'Нажми <b>Закончить</b>, чтобы выйти')
+                             'Нажми <b>Закончить</b>, чтобы выйти'
+                            ), reply_markup=gpt_keyboard())
 
 
 
