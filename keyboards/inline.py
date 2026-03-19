@@ -80,7 +80,7 @@ def choose_language_keyboard() -> InlineKeyboardMarkup:
                 InlineKeyboardButton(text='English', callback_data='translate:lang:eng'),
             ],
             [
-                InlineKeyboardButton(text='⛔ Закончить', callback_data='translate:stop', style='danger')
+                InlineKeyboardButton(text='⛔ Отмена', callback_data='translate:cancel', style='danger')
             ]
         ]
     )

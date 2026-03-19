@@ -1,8 +1,9 @@
 import logging
 from aiogram import Router, F, Bot
 from aiogram.filters import Command
-from aiogram.types import Message, CallbackQuery, FSInputFile, ReplyKeyboardMarkup
+from aiogram.types import Message, CallbackQuery, FSInputFile
 from aiogram.fsm.context import FSMContext
+import os
 from states.state import ImageStates
 from aiogram.enums import ChatAction
 from services.openai_service import photo_processing
@@ -44,7 +45,8 @@ async def analys_image(message: Message, bot: Bot):
     )
 
     image_description = await photo_processing(destination)
-    await message.answer(image_description)
+    await message.answer(image_description, reply_markup=image_gpt_keyboard())
+    os.remove(destination)
 
 
 @router.callback_query(F.data == 'image_gpt:stop')
@@ -52,7 +54,4 @@ async def on_image_gpt_stop(callback: CallbackQuery, state: FSMContext):
     await state.clear()
     await callback.answer('Выхожу из режима "Анализ изображений"')
 
-    try:
-        await callback.message.edit_caption(caption='Режим "Анализ изображений" завершен.\n\n<b>Главное меню:</b>', reply_markup=main_menu())
-    except Exception as e:
-        await callback.message.edit_text(text='Режим "Анализ изображений" завершен', reply_markup=main_menu())
+    await callback.message.answer(text='Режим "Анализ изображений" завершен.\n\n<b>Главное меню:</b>', reply_markup=main_menu())

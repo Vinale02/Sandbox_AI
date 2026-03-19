@@ -105,7 +105,7 @@ async def change_lang(callback: CallbackQuery, state: FSMContext):
                              reply_markup=choose_language_keyboard())
 
 
-@router.callback_query(F.data == 'translate:stop')
+@router.callback_query(F.data == 'translate:cancel')
 async def stop_translate(callback: CallbackQuery, state: FSMContext):
     await state.clear()
 
@@ -115,3 +115,11 @@ async def stop_translate(callback: CallbackQuery, state: FSMContext):
         await callback.message.edit_caption(caption='Режим "Переводчик".\n\n<b>Главное меню:</b>', reply_markup=main_menu())
     except Exception as e:
         await callback.message.edit_text(text='Режим "Переводчик" завершен.\n\n<b>Главное меню:</b>', reply_markup=main_menu())
+
+
+@router.callback_query(F.data == 'translate:stop')
+async def cancel_translate(callback: CallbackQuery, state: FSMContext):
+    await state.clear()
+    await callback.answer('Выхожу из режима "Переводчик"')
+
+    await callback.message.answer(text='Режим "Переводчик" завершен.\n\n<b>Главное меню:</b>', reply_markup=main_menu())
