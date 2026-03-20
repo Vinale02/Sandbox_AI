@@ -56,6 +56,7 @@ async def on_lang_choosen(callback: CallbackQuery, state: FSMContext):
     lang = LANGUAGES[lang_key]
 
     await state.update_data(lang=lang_key)
+    await state.set_state(TranslateStates.sending)
 
     await callback.answer(f'Выбран {lang['name']} язык')
 
@@ -66,7 +67,7 @@ async def on_lang_choosen(callback: CallbackQuery, state: FSMContext):
     )
 
 
-@router.message(F.text)
+@router.message(TranslateStates.sending, F.text)
 async def translating(message: Message, state: FSMContext):
     data = await state.get_data()
     lang_key = data['lang']

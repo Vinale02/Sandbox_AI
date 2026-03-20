@@ -6,7 +6,9 @@ from handlers.talk import router as talk_router
 from handlers.quiz import  router as quis_router
 from handlers.translate import router as translate_router
 from handlers.image_gpt import router as image_gpt_router
+from handlers.weather import router as weather_router
+from handlers.cats import router as cats_router
 
 router = Router()
 
-router.include_routers(command_router, random_fact_router, gpt_router, talk_router, quis_router, translate_router, image_gpt_router)
+router.include_routers(command_router, random_fact_router, gpt_router, talk_router, quis_router, translate_router, image_gpt_router, weather_router, cats_router)

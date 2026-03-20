@@ -9,7 +9,9 @@ def main_menu() -> InlineKeyboardMarkup:
             [InlineKeyboardButton(text='🗣️ Диалог с личностью', callback_data='menu:talk', style='primary')],
             [InlineKeyboardButton(text='🎯 Квиз', callback_data='menu:quiz', style='primary')],
             [InlineKeyboardButton(text='🌐 Переводчик',callback_data='menu:translate', style='primary')],
-            [InlineKeyboardButton(text='🖼️ Анализ изображений', callback_data='menu:image_gpt', style='primary')]
+            [InlineKeyboardButton(text='🖼️ Анализ изображений', callback_data='menu:image_gpt', style='primary')],
+            [InlineKeyboardButton(text='🌤️ Погода', callback_data='menu:weather', style='primary')],
+            [InlineKeyboardButton(text='🐱 Котики', callback_data='menu:cats', style='primary')],
         ]
     )
 
@@ -102,6 +104,51 @@ def image_gpt_keyboard() -> InlineKeyboardMarkup:
         inline_keyboard= [
             [
                 InlineKeyboardButton(text='⛔ Закончить', callback_data='image_gpt:stop', style='danger')
+            ]
+        ]
+    )
+
+
+def weather_keyboard() -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(
+        inline_keyboard= [
+            [
+                InlineKeyboardButton(text='⛔ Закончить', callback_data='weather:stop', style='danger')
+            ]
+        ]
+    )
+
+def weather_choosing_keyboard() -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(
+        inline_keyboard= [
+            [
+                InlineKeyboardButton(text='🔄 Сменить город', callback_data='weather:change_city'),
+                InlineKeyboardButton(text='⛔ Закончить', callback_data='weather:stop', style='danger')
+            ]
+        ]
+    )
+
+
+def weather_switch_city() -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(
+        inline_keyboard= [
+            [
+                InlineKeyboardButton(text='✅ Подтвердить', callback_data='weather:conf', style='success'),
+                InlineKeyboardButton(text='🔄 Сменить город', callback_data='weather:change_city', style='primary')
+            ],
+            [
+                InlineKeyboardButton(text='⛔ Закончить', callback_data='weather:stop', style='danger')
+            ]
+        ]
+    )
+
+
+def cats_keyboard() -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(
+        inline_keyboard= [
+            [
+                InlineKeyboardButton(text='🐱 Хочу ещё котика', callback_data='cats:again', style='success'),
+                InlineKeyboardButton(text='⛔ Закончить', callback_data='cats:stop', style='danger')
             ]
         ]
     )

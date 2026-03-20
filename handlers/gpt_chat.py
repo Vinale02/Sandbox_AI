@@ -31,13 +31,13 @@ async def cmd_gpt(message: Message, state: FSMContext):
                                    caption=(
                                        '<b>Режим ChatGPT</b>\n\n'
                                        'Напиши любой вопрос - я  отвечу\n'
-                                       'Контекст дивлога сохраняется\n'
+                                       'Контекст диалога сохраняется\n'
                                        'Нажми <b>Закончить</b>, чтобы выйти'
                                    ), reply_markup=gpt_keyboard(), parse_mode='html')
     except Exception as e:
         await message.answer(text=('<b>Режим ChatGPT</b>\n\n'
                              'Напиши любой вопрос - я  отвечу\n'
-                             'Контекст дивлога сохраняется\n'
+                             'Контекст диалога сохраняется\n'
                              'Нажми <b>Закончить</b>, чтобы выйти'
                             ), reply_markup=gpt_keyboard())
 
@@ -76,4 +76,4 @@ async def on_gpt_stop(callback: CallbackQuery, state: FSMContext):
     try:
         await callback.message.edit_caption(caption='Режим "ChatGPT" завершен.\n\n<b>Главное меню:</b>', reply_markup=main_menu())
     except Exception as e:
-        await callback.message.edit_text(text='Режим "ChatGPT" завершен', reply_markup=main_menu())
+        await callback.message.edit_text(text='Режим "ChatGPT" завершен\n\n<b>Главное меню:</b>', reply_markup=main_menu())

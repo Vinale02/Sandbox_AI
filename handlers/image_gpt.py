@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 async def cmd_image_gpt(message: Message, state: FSMContext):
     await state.set_state(ImageStates.sending)
     try:
-        photo = FSInputFile('images/gpt.png')
+        photo = FSInputFile('images/image_gpt.png')
         await message.answer_photo(photo=photo,
                                    caption=(
                                        '<b>Анализ изображений</b>\n\n'
